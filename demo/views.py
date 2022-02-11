@@ -6,13 +6,14 @@ from django.urls import reverse
 
 
 def hello_view(request):
-    return HttpResponse("hello")
+    name = request.GET.get('name', 'User')
+    return HttpResponse(f"hello {name}")
 
 
 def index_view(request):
     stri = 'Вы попали на главную страницу<br>' \
-           '<a href="http://127.0.0.1:8000/current_time/">/current_time/</a> - показ текущего времени<br>' \
-           '<a href="http://127.0.0.1:8000/workdir/">/workdir/</a> - показ дирректории'
+           f'<a href="http://127.0.0.1:8000/current_time/">{reverse("current_time")}</a> - показ текущего времени<br>' \
+           f'<a href="http://127.0.0.1:8000/workdir/">{reverse("workdir")}</a> - показ дирректории'
     return HttpResponse(stri)
 
 
